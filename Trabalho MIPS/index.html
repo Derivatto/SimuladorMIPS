@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" type="text/css" href="css/style5.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/materialize/materialize.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/materialize/materialize.min.css" media="screen" />
+    <title>SIMULADOR MIPS</title>
+    <style>
+        @font-face {
+            font-family: 'St';
+            src: url('font/VCR_OSD_MONO_1.001.ttf') format('truetype');
+        }
+    </style>
+</head>
+
+<body>
+    <label id="titulo">SIMULADOR MIPS</label>
+    <div class = "entradaDeDados">
+        <textarea id = "textoDoUsuario" spellcheck="false" placeholder="> Escreva aqui seu codigo!"></textarea>
+    </div>
+    <div class="botoes">
+        <button id="botao1">Step</button>
+        <button id="botao2">Run</button>
+        <button id="botao3">Reset PC</button>
+        <button id="botao4">Clear</button>
+    </div>
+
+    <div class="log">
+        <label id="saidaTerminal">TERMINAL DE SAIDA</label>
+        <textarea id = "saidaLog" spellcheck="false" disabled="disabled"></textarea>
+    </div>
+
+    <div class="PC">
+      <b>PC:</b>
+      <p id="numPC">0</p>
+    </div>
+
+
+    <div class="tabelaREG">
+        <!-- Tab links -->
+        <div class="tab">
+            <button id = "bt1" class="tablinks" onclick="openCity(event, 'London')">REG</button>
+            <button id = "bt2" class="tablinks" onclick="openCity(event, 'Paris')">MEM</button>
+            <button id = "bt3" class="tablinks" onclick="openCity(event, 'Tokyo')">CTRL</button>
+        </div>
+    
+        <!-- Tab content -->
+        <div id="London" class="tabcontent">
+                <table id="tabela" class="centered highlight striped tbodyREG">
+                    <thead>
+                            <tr class="tLinha">
+                                <th id="tlabel">Registrador</th>
+                                <th id="th2">Nome</th>
+                                <th id="th3">Valor</th>
+                            </tr>
+                    </thead>
+                    
+                    <tbody>   
+                        <tr>
+                            <td>0</td>
+                            <td>$zero</td>
+                            <td><span id="span$zero" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>$at</td>
+                            <td><span id="span$at" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>$v0</td>
+                            <td><span id="span$v0" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>$v1</td>
+                            <td><span id="span$v1" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>$a0</td>
+                            <td><span id="span$a0"contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>$a1</td>
+                            <td><span id="span$a1" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>$a2</td>
+                            <td><span id="span$a2" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>$a3</td>
+                            <td><span id="span$a3" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>$t0</td>
+                            <td><span id="span$t0" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>$t1</td>
+                            <td><span id="span$t1" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>$t2</td>
+                            <td><span id="span$t2" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td>$t3</td>
+                            <td><span id="span$t3" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>$t4</td>
+                            <td><span id="span$t4" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>$t5</td>
+                            <td><span id="span$t5" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td>$t6</td>
+                            <td><span id="span$t6" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>15</td>
+                            <td>$t7</td>
+                            <td><span id="span$t7" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>16</td>
+                            <td>$s0</td>
+                            <td><span id="span$s0" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>17</td>
+                            <td>$s1</td>
+                            <td><span id="span$s1" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>18</td>
+                            <td>$s2</td>
+                            <td><span id="span$s2" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>19</td>
+                            <td>$s3</td>
+                            <td><span id="span$s3" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>20</td>
+                            <td>$s4</td>
+                            <td><span id="span$s4" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>21</td>
+                            <td>$s5</td>
+                            <td><span id="span$s5" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>22</td>
+                            <td>$s6</td>
+                            <td><span id="span$s6" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>23</td>
+                            <td>$s7</td>
+                            <td><span id="span$s7" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>24</td>
+                            <td>$t8</td>
+                            <td><span id="span$t8" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>25</td>
+                            <td>$t9</td>
+                            <td><span id="span$t9" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>26</td>
+                            <td>$k0</td>
+                            <td><span id="span$k0" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>27</td>
+                            <td>$k1</td>
+                            <td><span id="span$k1" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>28</td>
+                            <td>$gp</td>
+                            <td><span id="span$gp" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>29</td>
+                            <td>$sp</td>
+                            <td><span id="span$sp" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>30</td>
+                            <td>$fp</td>
+                            <td><span id="span$fp" contenteditable="true">0</span></td>
+                        </tr>
+                        <tr>
+                            <td>31</td>
+                            <td>$ra</td>
+                            <td><span id="span$ra" contenteditable="true">0</span></td>
+                        </tr>
+                    
+                    </tbody>
+                </table>
+        </div>
+
+        <div id="Paris" class="tabcontent">
+            <table class="centered highlight striped tabelaCTRL">
+                <thead class="theadCTRL">
+                    <tr>
+                        <th>Endereço</th><th>Valor</th>
+                    </tr>
+                </thead>
+                
+                <tbody class="tbodyCTRL">
+                    <tr>
+                        <td>0</td><td class="tdMEM">0</td>
+                    </tr>
+                    <tr>
+                        <td>4</td><td class="tdMEM">0</td>
+                    </tr> 
+                    <tr>
+                        <td>8</td><td class="tdMEM">0</td>
+                    </tr>
+                    <tr>
+                        <td>12</td><td class="tdMEM">0</td>
+                    </tr>
+                    <tr>
+                        <td>16</td><td class="tdMEM">0</td>
+                    </tr>
+                    <tr>
+                        <td>20</td><td class="tdMEM">0</td>
+                    </tr>
+                    <tr>
+                        <td>24</td><td class="tdMEM">0</td>
+                    </tr>
+                    <tr>
+                        <td>28</td><td class="tdMEM">0</td>
+                    </tr>
+                    <tr>
+                        <td>32</td><td class="tdMEM">0</td>
+                    </tr>
+                    <tr>
+                        <td>36</td><td class="tdMEM">0</td>
+                    </tr>
+                    <tr>
+                        <td>40</td><td class="tdMEM">0</td>
+                    </tr>
+                    <tr>
+                        <td>44</td><td class="tdMEM">0</td>
+                    </tr>
+                    <tr>
+                        <td>48</td><td class="tdMEM">0</td>
+                    </tr>
+                    <tr>
+                        <td>52</td><td class="tdMEM">0</td>
+                    </tr>
+                    <tr>
+                        <td>56</td><td class="tdMEM">0</td>
+                    </tr>
+                    <tr>
+                        <td>60</td><td class="tdMEM">0</td>
+                    </tr>
+                    <tr>
+                        <td>64</td><td class="tdMEM">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <div id="Tokyo" class="tabcontent">
+            <table class="centered highlight striped tabelaCTRL">
+                <thead class="theadCTRL">
+                    <tr>
+                        <th>Saídas</th><th>Valor</th>
+                    </tr>
+                </thead>
+                
+                <tbody class="tbodyCTRL">
+                    <tr>
+                        <td>Jump</td><td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Branch</td><td>0</td>
+                    </tr>
+                    <tr>
+                        <td>MemRead</td><td>0</td>
+                    </tr>
+                    <tr>
+                        <td>MemtoReg</td><td>0</td>
+                    </tr>
+                    <tr>
+                        <td>ALUOp</td><td>0</td>
+                    </tr>
+                    <tr>
+                        <td>MemWrite</td><td>0</td>
+                    </tr>
+                    <tr>
+                        <td>ALUSrc</td><td>0</td>
+                    </tr>
+                    <tr>
+                        <td>RegWrite</td><td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+
+
+    <script src="js/materialize/materialize.js"></script>
+    <script src="js/materialize/materialize.min.js"></script>
+    <script type="text/javascript" src="js/interpretador.js"></script>
+    <script type="text/javascript" src="js/processador.js"></script>
+    <script type="text/javascript" src="js/sistema.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+
+</body>
+</html>
